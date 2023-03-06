@@ -1,4 +1,3 @@
 .cache/
 *.o
 dwm
-compile_commands.json
