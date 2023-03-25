@@ -71,14 +71,11 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
 static const char *drawcmd[] = { "flameshot", "gui", "--region", "1920x1080+0+0", NULL };
-#define REFRESH_DWM_BLOCKS_CODE "1"
-static const char *refreshStatusBarcmd[] = {"kill", "-RTMIN+" REFRESH_DWM_BLOCKS_CODE, "dwmblocks"};
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
     { 0,                            XK_Print,  spawn,          {.v = screenshotcmd } },
     { MODKEY|ShiftMask,             XK_d,      spawn,          {.v = drawcmd } },
-    { MODKEY,                       XK_r,      spawn,          {.v = refreshStatusBarcmd } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
