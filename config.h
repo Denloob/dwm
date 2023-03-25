@@ -62,8 +62,11 @@ static const Layout layouts[] = {
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
+#define REFRESH_DWMBLOCKS_KEYBOARD_CODE "13"
+
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+#define SET_KEYBOARD_LAYOUT(layout) SHCMD("xkb-switch -s " layout " && pkill -RTMIN+" REFRESH_DWMBLOCKS_KEYBOARD_CODE " dwmblocks")
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
@@ -76,6 +79,9 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
     { 0,                            XK_Print,  spawn,          {.v = screenshotcmd } },
     { MODKEY|ShiftMask,             XK_d,      spawn,          {.v = drawcmd } },
+    { MODKEY|ShiftMask,             XK_r,      spawn,          SET_KEYBOARD_LAYOUT("ru") },
+    { MODKEY|ShiftMask,             XK_e,      spawn,          SET_KEYBOARD_LAYOUT("us") },
+    { MODKEY|ShiftMask,             XK_h,      spawn,          SET_KEYBOARD_LAYOUT("il") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
