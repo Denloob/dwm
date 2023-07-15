@@ -77,6 +77,7 @@ static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
 static const char *drawcmd[] = { "flameshot", "gui", "--region", "1920x1080+0+0", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "kitty", "-T", scratchpadname, NULL };
+static const char *suspendcmd[] = {"systemctl", "suspend"};
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -86,6 +87,7 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,             XK_e,      spawn,          SET_KEYBOARD_LAYOUT("us") },
     { MODKEY|ShiftMask,             XK_h,      spawn,          SET_KEYBOARD_LAYOUT("il") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+    { MODKEY,                       XK_s,      spawn,          {.v = suspendcmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
     { MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
