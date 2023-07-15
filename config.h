@@ -67,10 +67,11 @@ static const Layout layouts[] = {
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 #define REFRESH_DWMBLOCKS_KEYBOARD_CODE "13"
+#define KEYBOARD_LAYOUTS "us,il,ru"
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
-#define SET_KEYBOARD_LAYOUT(layout) SHCMD("xkb-switch -s " layout " && pkill -RTMIN+" REFRESH_DWMBLOCKS_KEYBOARD_CODE " dwmblocks")
+#define SET_KEYBOARD_LAYOUT(layout) SHCMD("[[ $(xkb-switch -l | wc -l) -le 1 ]] && setxkbmap -layout " KEYBOARD_LAYOUTS " ; xkb-switch -s " layout " && pkill -RTMIN+" REFRESH_DWMBLOCKS_KEYBOARD_CODE " dwmblocks")
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
