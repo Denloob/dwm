@@ -29,17 +29,20 @@ static const char *colors[][3]      = {
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
+static const char scratchpadname[] = "scratchpad";
+
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
-	{ "firefox",  NULL,     NULL,           1 << 1,    0,          0,           0,        -1 },
-	{ "kitty",    NULL,     NULL,           0,         0,          1,           0,        -1 },
-	{ "obsidian", NULL,     NULL,           1 << 6,    0,          0,           0,        -1 },
-	{ "discord",  NULL,     NULL,           1 << 3,    0,          0,           0,        -1 },
-	{ NULL,       NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
+	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor    float x,y,w,h       floatborderpx*/
+	{ "firefox",  NULL,     NULL,           1 << 1,    0,          0,           0,        -1,       -1,-1,-1,-1,         -1},
+	{ "kitty",    NULL,     NULL,           0,         0,          1,           0,        -1,       -1,-1,-1,-1,         -1},
+	{ "kitty",    NULL,     scratchpadname, 0,         1,          1,           0,        -1,       -1,-1,960,540,       -1},
+	{ "obsidian", NULL,     NULL,           1 << 6,    0,          0,           0,        -1,       -1,-1,-1,-1,         -1},
+	{ "discord",  NULL,     NULL,           1 << 3,    0,          0,           0,        -1,       -1,-1,-1,-1,         -1},
+	{ NULL,       NULL,     "Event Tester", 0,         0,          0,           1,        -1,       -1,-1,-1,-1,         -1}, /* xev */
 };
 
 /* status bar for the statuscmd patch */
@@ -79,7 +82,6 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
 static const char *drawcmd[] = { "flameshot", "gui", "--region", "1920x1080+0+0", NULL };
-static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "kitty", "-T", scratchpadname, NULL };
 static const char *suspendcmd[] = {"systemctl", "suspend"};
 

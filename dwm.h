@@ -77,6 +77,8 @@ struct Client {
 	int bw, oldbw;
 	unsigned int tags;
 	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen, isterminal, noswallow;
+	int floatborderpx;
+	int hasfloatbw;
 	pid_t pid;
 	Client *next;
 	Client *snext;
@@ -127,6 +129,8 @@ typedef struct {
 	int isterminal;
 	int noswallow;
 	int monitor;
+	int floatx, floaty, floatw, floath;
+	int floatborderpx;
 } Rule;
 
 /* function declarations */
