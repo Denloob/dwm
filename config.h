@@ -83,7 +83,7 @@ static const char *termcmd[]  = { "kitty", NULL };
 static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
 static const char *drawcmd[] = { "flameshot", "gui", "--region", "1920x1080+0+0", NULL };
 static const char *scratchpadcmd[] = { "kitty", "-T", scratchpadname, NULL };
-static const char *suspendcmd[] = {"systemctl", "suspend"};
+static const char *suspendcmd[] = {"systemctl", "suspend", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
