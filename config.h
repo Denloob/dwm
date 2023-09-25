@@ -84,8 +84,8 @@ static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
 static const char *drawcmd[] = { "flameshot", "gui", "--region", "1920x1080+0+0", NULL };
 static const char *scratchpadcmd[] = { "kitty", "-T", scratchpadname, NULL };
 static const char *suspendcmd[] = {"systemctl", "suspend", NULL };
-static const char *brightnessdowncmd[] = {"brillo", "-U", "5", NULL };
-static const char *brightnessupcmd[] = {"brillo", "-A", "5", NULL };
+static const char *brightnessdowncmd[] = {"brillo", "-q", "-U", "1", NULL };
+static const char *brightnessupcmd[] = {"brillo", "-q", "-A", "1", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
