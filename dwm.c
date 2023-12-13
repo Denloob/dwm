@@ -23,6 +23,7 @@
 
 /* HACK: allows to include in config.h for lsp */
 #include "dwm.h"
+#include <math.h>
 
 #define FROM_DWM_C
 
@@ -535,6 +536,50 @@ dirtomon(int dir)
 }
 
 void
+draw_christmas_decorations(const Drw *drw, const int x, const int y, const unsigned int w, const unsigned int h)
+{
+    if (!drw)
+        return;
+
+    const int num_points = 200;
+    const int light_after = 8;
+    const int amplitude = h/3;
+
+    for (int i = 0; i < num_points; ++i) {
+        const double angle = i * 2 * M_PI / num_points ;
+        const int x_pos = x + i * w / num_points;
+        const int y_pos = y + h / 2 + amplitude * sin(amplitude * angle);
+
+        XSetForeground(drw->dpy, drw->gc, drw->scheme[ColFg].pixel);
+        XDrawPoint(drw->dpy, drw->drawable, drw->gc, x_pos, y_pos);
+
+        if (i % light_after == 0) {
+            const int ball_radius = 5;
+            unsigned long ball_color = 0x05;
+            const int red = rand() % 101;
+            const int green = rand() % 101;
+            switch (rand() % 4)
+            {
+                case 0:
+                    ball_color = 0xbbbb00 | (red << 16) | (green << 8);
+                    break;
+                case 1:
+                case 2:
+                    ball_color = 0xff0000 | (green << 8);
+                    break;
+                case 3:
+                    ball_color = 0x00ff00 | (red << 16);
+                    break;
+            }
+
+            XSetForeground(drw->dpy, drw->gc, ball_color);
+            XFillArc(drw->dpy, drw->drawable, drw->gc, x_pos - ball_radius, y_pos - ball_radius,
+                     2 * ball_radius, 2 * ball_radius, 0, 360 * 64);
+        }
+    }
+}
+
+void
 drawbar(Monitor *m)
 {
 	int x, w, tw = 0;
@@ -592,6 +637,7 @@ drawbar(Monitor *m)
 		if (m->sel) {
 			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
 			drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
+            draw_christmas_decorations(drw, x, 0, w, bh);
 			if (m->sel->isfloating)
 				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
 		} else {
