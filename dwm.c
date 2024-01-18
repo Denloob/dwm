@@ -535,6 +535,14 @@ dirtomon(int dir)
 	return m;
 }
 
+int is_christmas() {
+    time_t t;
+    time(&t);
+    struct tm *tm_infoo = localtime(&t);
+
+    return SHOULD_DRAW_CHRISTMAS_LIGHTS(tm_infoo->tm_mon);
+}
+
 void
 draw_christmas_decorations(const Drw *drw, const int x, const int y, const unsigned int w, const unsigned int h)
 {
@@ -637,7 +645,10 @@ drawbar(Monitor *m)
 		if (m->sel) {
 			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
 			drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
-            draw_christmas_decorations(drw, x, 0, w, bh);
+
+            if (is_christmas())
+                draw_christmas_decorations(drw, x, 0, w, bh);
+
 			if (m->sel->isfloating)
 				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
 		} else {

@@ -8,6 +8,8 @@
 #pragma clang diagnostic ignored "-Wunused-variable"
 
 /* appearance */
+#define SHOULD_DRAW_CHRISTMAS_LIGHTS(month) (month == 11 || month == 0)
+
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */

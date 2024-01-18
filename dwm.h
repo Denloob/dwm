@@ -21,6 +21,7 @@
 #include <X11/Xft/Xft.h>
 #include <X11/Xlib-xcb.h>
 #include <xcb/res.h>
+#include <time.h>
 #ifdef __OpenBSD__
 #include <sys/sysctl.h>
 #include <kvm.h>
