@@ -91,6 +91,7 @@ static const char *float_terminal_cmd[] = { "kitty", "-T", float_terminal_name, 
 static const char *suspendcmd[] = {"systemctl", "suspend", NULL };
 static const char *brightnessdowncmd[] = {"brillo", "-q", "-U", "1", NULL };
 static const char *brightnessupcmd[] = {"brillo", "-q", "-A", "1", NULL };
+static const char *poweroffcmd[] = { "shutdown-prompt", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -128,6 +129,8 @@ static const Key keys[] = {
 
     { 0,                            XF86XK_MonBrightnessDown, spawn, {.v = brightnessdowncmd}},
     { 0,                            XF86XK_MonBrightnessUp,   spawn, {.v = brightnessupcmd}},
+
+    { 0,                            XF86XK_PowerOff,          spawn, {.v = poweroffcmd} },
 
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
