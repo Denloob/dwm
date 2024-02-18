@@ -32,6 +32,7 @@ static const char *colors[][3]      = {
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const char scratchpadname[] = "scratchpad";
+static const char float_terminal_name[] = "floaty";
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -45,6 +46,7 @@ static const Rule rules[] = {
 	{ "obsidian", NULL,     NULL,           1 << 6,    0,          0,           0,        -1,       -1,-1,-1,-1,         -1},
 	{ "discord",  NULL,     NULL,           1 << 3,    0,          0,           0,        -1,       -1,-1,-1,-1,         -1},
 	{ NULL,       NULL,     "Event Tester", 0,         0,          0,           1,        -1,       -1,-1,-1,-1,         -1}, /* xev */
+	{ "kitty",    NULL,float_terminal_name, 0,         1,          1,           0,        -1,       480,270,960,540,     -1},
 };
 
 /* status bar for the statuscmd patch */
@@ -85,6 +87,7 @@ static const char *termcmd[]  = { "kitty", NULL };
 static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
 static const char *drawcmd[] = { "flameshot", "gui", "--region", "1920x1080+0+0", NULL };
 static const char *scratchpadcmd[] = { "kitty", "-T", scratchpadname, NULL };
+static const char *float_terminal_cmd[] = { "kitty", "-T", float_terminal_name, NULL };
 static const char *suspendcmd[] = {"systemctl", "suspend", NULL };
 static const char *brightnessdowncmd[] = {"brillo", "-q", "-U", "1", NULL };
 static const char *brightnessupcmd[] = {"brillo", "-q", "-A", "1", NULL };
@@ -100,6 +103,7 @@ static const Key keys[] = {
     { MODKEY,                       XK_s,      spawn,          {.v = suspendcmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
     { MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
+    { MODKEY|ShiftMask,             XK_grave,  spawn,          {.v = float_terminal_cmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
