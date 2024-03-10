@@ -84,8 +84,8 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
-static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
-static const char *drawcmd[] = { "flameshot", "gui", "--region", "1920x1080+0+0", NULL };
+static const char *screenshotcmd[] = { "screenshot-window", NULL };
+static const char *screenshotallcmd[] = { "screenshot", NULL };
 static const char *scratchpadcmd[] = { "kitty", "-T", scratchpadname, NULL };
 static const char *float_terminal_cmd[] = { "kitty", "-T", float_terminal_name, NULL };
 static const char *suspendcmd[] = {"systemctl", "suspend", NULL };
@@ -96,7 +96,7 @@ static const char *poweroffcmd[] = { "shutdown-prompt", NULL };
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
     { 0,                            XK_Print,  spawn,          {.v = screenshotcmd } },
-    { MODKEY|ShiftMask,             XK_d,      spawn,          {.v = drawcmd } },
+    { MODKEY,                       XK_Print,  spawn,          {.v = screenshotallcmd } },
     { MODKEY|ShiftMask,             XK_r,      spawn,          SET_KEYBOARD_LAYOUT("ru") },
     { MODKEY|ShiftMask,             XK_e,      spawn,          SET_KEYBOARD_LAYOUT("us") },
     { MODKEY|ShiftMask,             XK_h,      spawn,          SET_KEYBOARD_LAYOUT("il") },
