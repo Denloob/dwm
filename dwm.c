@@ -1182,7 +1182,19 @@ propertynotify(XEvent *e)
 		case XA_WM_TRANSIENT_FOR:
 			if (!c->isfloating && (XGetTransientForHint(dpy, c->win, &trans)) &&
 				(c->isfloating = (wintoclient(trans)) != NULL))
+			{
+				/* If the client we just made floating, is related to "Ghidra",
+				 *  force it to not be floating.
+				 *  @see https://bbs.archlinux.org/viewtopic.php?id=258444
+				 */
+				XClassHint ch = { NULL, NULL };
+				XGetClassHint(dpy, c->win, &ch);
+				const char *class = ch.res_class ? ch.res_class : broken;
+				if (strstr(class, "Ghidra"))
+					c->isfloating = 0;
+
 				arrange(c->mon);
+			}
 			break;
 		case XA_WM_NORMAL_HINTS:
 			c->hintsvalid = 0;
