@@ -4,8 +4,10 @@
 
 /* See LICENSE file for copyright and license details. */
 
+#ifdef __clang__
 #pragma clang diagnostic ignored "-Wundefined-internal"
 #pragma clang diagnostic ignored "-Wunused-variable"
+#endif
 
 /* appearance */
 #define SHOULD_DRAW_CHRISTMAS_LIGHTS(month) (month == 11 || month == 0)
