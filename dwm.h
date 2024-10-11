@@ -135,6 +135,13 @@ typedef struct {
 	int floatborderpx;
 } Rule;
 
+typedef struct Workspace Workspace;
+struct Workspace {
+	unsigned int tagset;
+	const Layout *lt;
+	float mfact;
+};
+
 /* function declarations */
 static void applyrules(Client *c);
 static int applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact);
@@ -231,6 +238,8 @@ static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
+static void prevws(const Arg *arg);
+static void nextws(const Arg *arg);
 
 static pid_t getparentprocess(pid_t p);
 static int isdescprocess(pid_t p, pid_t c);
@@ -275,3 +284,4 @@ static Display *dpy;
 static Drw *drw;
 static Monitor *mons, *selmon;
 static Window root, wmcheckwin;
+static unsigned int ws = 0;

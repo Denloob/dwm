@@ -2112,6 +2112,32 @@ view(const Arg *arg)
 	arrange(selmon);
 }
 
+static void
+setws(int nws) {
+	workspaces[ws].tagset = selmon->tagset[selmon->seltags];
+	workspaces[ws].lt = selmon->lt[selmon->sellt];
+	workspaces[ws].mfact = (workspaces[ws].lt == &layouts[0]) ? mfact : 0;
+	if(nws < LENGTH(workspaces))
+		ws = nws;
+	if(workspaces[ws].tagset) {
+		selmon->tagset[selmon->seltags] = workspaces[ws].tagset;
+		selmon->lt[selmon->sellt] = workspaces[ws].lt;
+		if(workspaces[ws].mfact != 0)
+			selmon->mfact = workspaces[ws].mfact;
+		arrange(selmon);
+	}
+}
+
+static void
+prevws(const Arg *arg) {
+	setws((ws == 0) ? LENGTH(workspaces) - 1 : ws - 1);
+}
+
+static void
+nextws(const Arg *arg) {
+	setws((ws == LENGTH(workspaces) - 1) ? 0 : ws + 1);
+}
+
 pid_t
 winpid(Window w)
 {

@@ -67,6 +67,8 @@ static const Layout layouts[] = {
 	{ "[M]",      monocle },
 };
 
+static Workspace workspaces[4];
+
 /* key definitions */
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
@@ -107,6 +109,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
     { MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
     { MODKEY|ShiftMask,             XK_grave,  spawn,          {.v = float_terminal_cmd } },
+    { MODKEY|ShiftMask,             XK_j,      nextws,         {0} },
+	{ MODKEY|ShiftMask,             XK_k,      prevws,         {0} },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
